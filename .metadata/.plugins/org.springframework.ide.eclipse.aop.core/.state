@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="example"/>
+<aop-project name="testAnnoCTX"/>
+<aop-project name="MVC_02"/>
+<aop-project name="cookie"/>
+<aop-project name="MVC_Join"/>
+<aop-project name="session"/>
+<aop-project name="MVC_Service"/>
+<aop-project name="service"/>
+<aop-project name="firstSpring"/>
+<aop-project name="redirect"/>
+<aop-project name="MVC_01"/>
+<aop-project name="MVC_03"/>
+</aop-reference-model>

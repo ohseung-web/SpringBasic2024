@@ -1,0 +1,5 @@
+package com.green.session.dto;
+
+public class Member {
+
+}

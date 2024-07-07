@@ -1,0 +1,5 @@
+package com.green.example.controller;
+
+public class MemberController {
+
+}

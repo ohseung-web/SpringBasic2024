@@ -1,0 +1,5 @@
+package com.green.service.Service;
+
+public interface IMemberService {
+
+}

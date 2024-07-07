@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+<!-- 의존 객체 자동주입 방식 -->
+<!-- 클래스에서 어노테이션을 이용하여 직접 주입할 수 있다. -->
+<!-- xml 파일에서는 bean만 정의한다. -->
+<!-- Calculator 클래스에 이름을 달아 놓는다 -->
+<!-- 1)@Component('이름') -->
+<!-- 2)예시
+       @Component("cal") : 내가 cal 이다. => 단, 반드시 클래스명 위에 삽입한다.
+       MyCalculator 클래스의 필드선언 (private Calculator calculator)에
+       두개의 어노테이션을 달아 준다.
+       - @Qualifier("cal") : cal을 
+       - @Autowired : 자동으로 주입해주세요
+       - <context:annotation-config />태그는 자동주입이 가능하도록 지정한 태그 명령어이다. 
+ -->
+<context:annotation-config />
+<bean id="cal" class="com.green.spring.Calculator" />
+<bean id="mycal" class="com.green.spring.MyCalculator"/>
+
+<bean id="computer" class="com.green.spring02.Computer" />
+<bean id="speaker" class="com.green.spring02.Speaker" />
+</beans>

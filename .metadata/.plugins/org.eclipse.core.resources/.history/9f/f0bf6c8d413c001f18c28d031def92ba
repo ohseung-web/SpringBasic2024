@@ -1,0 +1,5 @@
+package com.green.example.dto;
+
+public class MemberDTO {
+
+}

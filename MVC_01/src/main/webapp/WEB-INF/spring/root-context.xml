@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- setter이용  -->
+	<bean id="context1" class="com.green.mvc01.dto.ContextDTO">
+	   <property name="phone"  value="010-1111-1111" />
+	   <property name="add"  value="서울시 종로구" />  
+	</bean>	
+	
+	<bean id="person1" class="com.green.mvc01.dto.PersonDTO">
+	  <property name="name"  value="에밀리" />
+	  <property name="age"  value="20" />
+	  <property name="cdto"  ref="context1" />
+	</bean>
+	
+	<!-- 매개변수가 존재하는 생성자  -->
+	<bean id="context2" class="com.green.mvc01.dto.ContextDTO">
+	       <constructor-arg value="010-8888-8888" />
+	       <constructor-arg value="서울시 마포구"/> 
+	</bean>
+	<bean id="person2" class="com.green.mvc01.dto.PersonDTO">
+	   <constructor-arg value="제임스"/>
+	   <constructor-arg value="30"/>
+	   <constructor-arg ref="context2" />
+	</bean>
+	
+		
+</beans>

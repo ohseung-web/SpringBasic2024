@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+     <!-- xml 파일의 주석 단축키 : ctrl + shift + /, 해제 : ctrl + shift + \ -->  
+     <!-- bean의 속성 id='tWalk'는 개발자가 알아서 정한다.  --> 
+     <!-- bean의 속성 class='' 반드시 패키지명.클래스이름 으로 작성한다. -->
+     <!-- bean 태그에 의해서 자동으로 객체가 생성된다. --> 
+     <!-- 객체가 생성이 되었다는 것은 메모리에 로드가 되었다는 뜻이다. -->
+     <!-- 이를 스프링에서는 스프링 컨테이너라(객체를 담고있다.) 한다. -->         
+     <bean id="tWalk" class="testPjt.TransportationWalk" />
+  
+     <bean id="calcul" class="testCal.Calculator"/>
+     <bean id="mycal1" class="testCal.MyCalculator">
+       <property name="num1" value="10"/>
+       <property name="num2" value="3" />
+       <property name="cal" ref="calcul" /> 
+     </bean>
+     
+     <bean id="mycal2" class="testCal.MyCalculator">
+       <property name="num1" value="100"/>
+       <property name="num2" value="30" />
+       <property name="cal" ref="calcul" /> 
+     </bean>
+       
+  
+   </beans> 
+   
+   

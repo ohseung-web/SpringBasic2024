@@ -1,0 +1,5 @@
+package com.green.MVCService.dao;
+
+public interface IMemberDAO {
+
+}

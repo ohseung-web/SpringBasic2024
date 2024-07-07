@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ <bean id="listarry" class="testList.ListArray">
+ <property name="list">
+   <list>
+     <value>떡볶이</value>
+     <value>순대</value>
+     <value>튀김</value>
+     <value>오뎅</value>
+   </list>
+ </property>   
+ </bean>
+ 
+ <bean id="maphandler" class="testList.MapHandler">
+   <property name="mymap">
+     <map>
+        <entry key="name" value="에밀리" />
+		<entry key="age" value="20" />
+		<entry key="address" value="서울시" />
+		<entry key="gender" value="여자" />
+		<entry key="phone" value="010-1111-1111" />
+     </map>
+   </property>
+ </bean>
+ 
+ </beans>		

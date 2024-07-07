@@ -1,0 +1,5 @@
+package com.green.service.dto;
+
+public class MemberDTO {
+
+}

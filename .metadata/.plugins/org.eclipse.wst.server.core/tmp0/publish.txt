@@ -1,0 +1,12 @@
+#Tomcat publish data
+#Sun Jul 07 22:56:37 KST 2024
+org.eclipse.jst.jee.server\:session=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\session
+org.eclipse.jst.jee.server\:example=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\example
+org.eclipse.jst.jee.server\:MVC_Join=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_Join
+org.eclipse.jst.jee.server\:MVC_Service=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_Service
+org.eclipse.jst.jee.server\:cookie=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\cookie
+org.eclipse.jst.jee.server\:redirect=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\redirect
+org.eclipse.jst.jee.server\:MVC_02=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_02
+org.eclipse.jst.jee.server\:MVC_03=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_03
+org.eclipse.jst.jee.server\:MVC_01=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_01
+org.eclipse.jst.jee.server\:service=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\service

@@ -1,0 +1,5 @@
+package com.green.session.service;
+
+public class MemberService {
+
+}

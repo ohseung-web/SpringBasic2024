@@ -1,0 +1,5 @@
+package com.green.session.dao;
+
+public class MemberDao {
+
+}

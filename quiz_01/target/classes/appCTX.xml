@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- quiz_01번 문제 -->
+<bean id="bmiCalc" class="quiz_01.BMICalculator">
+	<property name="normal" value="20" />
+	<property name="over" value="26" />
+	<property name="obesity" value="31" />
+</bean>
+
+<bean id="person" class="quiz_01.Person">
+	<property name="name" value="앨리스" />
+	<property name="weight" value="55.5" />
+	<property name="height" value="165.5" />
+	<property name="bmiCalculator" ref="bmiCalc" />
+	<property name="hobbies">
+		<list>
+			<value>운동</value>
+			<value>여행</value>
+			<value>독서</value>
+		</list>
+	</property>
+</bean>
+
+<!-- quiz_02번 문제  -->
+<bean id="calc" class="quiz_02.Calculator" />
+	
+	<bean id="gugudan" class="quiz_02.Gugudan">
+		<property name="startDan" value="3" />
+		<property name="endDan" value="4" />
+		<property name="startNum" value="5" />
+		<property name="endNum" value="7" />
+		<property name="calculator" ref="calc" />
+	</bean>
+	
+	
+<!-- quiz_03번 문제  -->
+
+<bean id="midterm" class="quiz_03.ExamScore"></bean>
+
+<bean id="student" class="quiz_03.Student">
+	<property name="name" value="david" />
+	<property name="age" value="19" />
+	<property name="homeInfo">
+		<map>
+			<entry key="address" value="seoul" />
+			<entry key="phone" value="010-5555-5555" />
+		</map>
+	</property>
+	<property name="scoreList">
+		<list>
+			<value>50</value>
+			<value>60</value>
+			<value>70</value>
+			<value>80</value>
+			<value>90</value>
+		</list>
+	</property>
+	<property name="exam" ref="midterm" />
+</bean>	
+	
+</beans> 

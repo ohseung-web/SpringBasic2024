@@ -1,0 +1,8 @@
+package com.green.example.service;
+
+import com.green.example.dto.MemberDTO;
+
+public interface IMemberService {
+   void join(MemberDTO mdto);
+   MemberDTO joinserch(MemberDTO mdto);
+}

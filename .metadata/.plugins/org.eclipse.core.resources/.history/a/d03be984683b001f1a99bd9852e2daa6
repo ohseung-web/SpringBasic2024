@@ -1,0 +1,118 @@
+package com.green.session.controller;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.green.session.dto.Member;
+import com.green.session.service.MemberService;
+
+@Controller
+@RequestMapping("/member") //모든 공통적인 경로인 member를 지정함
+public class MemberController {
+	
+      @Autowired
+      MemberService service;
+      
+     //	request.getContextPath()  = 프로젝트 Path (컨텍스트 path) 만 가져온다.
+     //	예)  http://localhost:8080/project/list.jsp
+     //		[return] /project 
+     // 고로 현재 출력되는 request.getContextpath()는 /session이다. 
+      @ModelAttribute("cp")
+  	   public String getContextPath(HttpServletRequest request) {
+    	  System.out.println("path :" + request.getContextPath());
+    	  return request.getContextPath();
+  	   }
+      
+      //join
+      @RequestMapping(value="/joinForm")
+      public String joinForm(Member member){
+    	  return "member/joinForm";
+      }
+      
+      @RequestMapping(value="/join", method=RequestMethod.POST)
+      public String joinReg(Member member) {
+    	  service.memberRegister(member);
+    	  return "member/joinOk";
+      }
+      
+      //Login
+      @RequestMapping("/loginForm")
+      public String loginFrom(Member member) {
+    	  return "member/loginForm";
+      }
+      
+      //session으로 로그인 정보 가져온다.
+      @RequestMapping(value="/login", method=RequestMethod.POST)
+      public String memLogin(Member member, HttpSession session) {
+    	  Member mem = service.memberSearch(member);
+    	  session.setAttribute("member", mem);
+    	  System.out.println("member1 : "+ member.getMemId());
+    	  return "member/loginOk";
+      }
+      
+      /*
+  	@RequestMapping(value = "/login", method = RequestMethod.POST)
+  	public String memLogin(Member member, HttpServletRequest request) {
+  		
+  		Member mem = service.memberSearch(member);
+  		
+  		HttpSession session = request.getSession();
+  		session.setAttribute("member", mem);
+  		
+  		return "/member/loginOk";
+  	}
+  	*/
+      
+      
+      //로그아웃 하면 session 삭제한다.
+      @RequestMapping("/logout")
+      public String memLogout(Member member, HttpSession session) {
+    	  session.invalidate();
+    	  return "member/logoutOk";
+      }
+      
+      //회원 정보 수정
+      @RequestMapping(value="/modifyForm")
+      public String modifyForm(HttpServletRequest request, Model model) {
+    	  
+    	  HttpSession session = request.getSession();
+  		  Member member = (Member) session.getAttribute("member");
+  		
+  		if(null == member) {
+  			return "redirect:/";
+  		} else {
+  			model.addAttribute("member", service.memberSearch(member));
+  		}
+  		
+  		return "/member/modifyForm";
+    	  
+      }
+      
+      //MyPage로 이동
+      @RequestMapping("/mypageForm")
+      public String mypageForm(Model model, HttpSession session) {
+    	  
+    	// 현재 로그인된 id와 pw session의 값을 가져와서 mem에 담아 비교한다.
+    	  Member mem = (Member) session.getAttribute("member"); 
+    
+    	  if(mem == null) {
+    		  return "redirect:/member/loginForm";
+    	  }else {
+    		  model.addAttribute("memId", mem.getMemId());
+    		  System.out.println(mem.getMemId());
+    	  }
+    	  
+    	  
+		return "/member/mypageForm";
+    	  
+      }
+}

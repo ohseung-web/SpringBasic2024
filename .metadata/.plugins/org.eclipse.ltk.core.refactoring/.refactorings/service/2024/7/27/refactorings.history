@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;service/src/main/webapp/resources/html/memberJoin.html&apos; to &apos;memJoin.html&apos;" description="Rename resource &apos;memberJoin.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/resources/html/memberJoin.html" name="memJoin.html" stamp="1719917202569" updateReferences="true"/>
+</session>

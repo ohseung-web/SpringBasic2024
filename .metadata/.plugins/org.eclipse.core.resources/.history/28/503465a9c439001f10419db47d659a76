@@ -1,0 +1,5 @@
+package com.green.cookie.dto;
+
+public class Mall {
+
+}

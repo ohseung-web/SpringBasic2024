@@ -1,0 +1,5 @@
+package com.green.example.service;
+
+public class MemberService {
+
+}

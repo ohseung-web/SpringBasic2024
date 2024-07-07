@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+<!-- <context:annotation-config />
+<bean class ="com.green.quiz04.AnnoCTX" /> -->
+<!-- 위의 두 태그로 <bean id="gun" class="com.green.quiz04.Gun" />  태그가 삽입되었다. -->
+
+<!-- <bean id="cop" class="com.green.quiz04.Police">
+     <property name="name" value="제임스" />
+     <property name="deptInfo">
+          <map>
+              <entry  key="deptname"  value="강력반" />
+              <entry  key ="deptloc" value="102호" /> 
+          </map>
+     </property>
+     <property name="pistol"  ref="gun" />
+</bean> -->
+
+ <bean id="myengine" class="com.green.quiz05.Engine">
+  <property name="fuelType"   value="디젤" />
+  <property name="cc"  value="1991" />
+  <property name="hp"  value="245" />
+  <property name="fuelEffciency"   value="12.5"/>
+</bean>
+
+</beans>

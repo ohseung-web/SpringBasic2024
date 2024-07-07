@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- setter를 통한 주입  -->
+	<bean id="person1" class="testPerson.Person">
+	 <property name="name"  value="제임스" />
+	 <property name="age" value="20" />
+	 <property name="gender" value="남" />
+	 <property name="phone"  value="111-1111-1111" />
+	</bean>
+	<!-- 매개변수를 이용한 생성자로 주입  -->
+	<bean id="person2" class="testPerson.Person">
+	     <constructor-arg  value="엘리스"/>
+	     <constructor-arg value="32"/>
+	     <constructor-arg value="여"/>
+	     <constructor-arg value="555-5555-5555"/>
+	</bean>
+
+    <!--property와 constructor-arg  방식 중 많이 사용하고 우수한 방식은 -property 방식이다.   -->
+	<bean id="handler1" class="testPerson.PersonHandler">
+	   <property name="person"  ref="person1" />
+	</bean>
+	
+	<bean id="handler2"  class="testPerson.PersonHandler">
+	   <constructor-arg  ref="person2"/>
+	</bean> 
+</beans>

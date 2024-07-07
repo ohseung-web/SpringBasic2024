@@ -1,0 +1,43 @@
+package com.green.example.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.example.service.MemberService;
+
+@Controller
+@RequestMapping("/member")
+public class BoardController {
+
+	@Autowired
+	MemberService service;
+	
+	@RequestMapping("/boardList")
+	public String boardList(HttpSession session) {
+		//로그인된 상태인지 체크한다.
+		if(loginChk(session)) 
+			return "redirect:/member/loginForm";
+		
+		return "/member/boardList";
+	}
+
+
+	//로그인 체크하는 loginChk()메서드 작성
+	private boolean loginChk(HttpSession session) {
+		
+		//세션을 얻어서 id가 존재하는지 확인하다.
+		//id가 존재하지 않으면 false를 반환
+	    if(	session.getAttribute("id") == null) {
+	    	return false;
+	    }
+	    
+	    //id가 존재하면 true를 반환한다.
+		return true;
+	}
+	
+}

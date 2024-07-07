@@ -1,0 +1,27 @@
+package com.green.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.green.example.dao.MemberDAO;
+import com.green.example.dto.MemberDTO;
+
+@Service
+public class MemberService implements IMemberService{
+
+	@Autowired
+	MemberDAO mdao;
+	
+	@Override
+	public void memberJoin(MemberDTO mdto) {
+		// mdao.memInsert()ø° ¿˙¿Â
+		mdao.memInsert(mdto);
+	}
+
+	@Override
+	public MemberDTO memberSerch(MemberDTO mdto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
