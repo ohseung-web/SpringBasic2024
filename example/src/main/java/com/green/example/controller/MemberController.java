@@ -40,12 +40,16 @@ public class MemberController {
 	
 	//로그인 상태를 session을 이용하여 유지시킨다.
 	@RequestMapping(value="/loginOk", method = RequestMethod.POST)
-	public String loginOk(HttpSession session, @ModelAttribute("m") MemberDTO mdto) {
+	public String loginOk(HttpSession session, @ModelAttribute("m") MemberDTO mdto,
+			String toURL) {
 		MemberDTO mem = service.memberSerch(mdto);
 		//session.setAttribute()메서도를 이용하여 세션에 저장한다.
 		session.setAttribute("mdto", mem);
 		//return "/member/loginOk";
-		return "redirect:/"; //HOME으로 이동
+		//loginForm.jsp에서 넘어온 toRUL의 값이null이면 home으로 보내기
+		toURL = toURL==null || toURL.equals("") ? "/" : toURL;
+		//return "redirect:/"; //HOME으로 이동
+		return "redirect:" + toURL;
 	}
 	
 	//로그아웃을 클릭하면 session을 삭제한다.

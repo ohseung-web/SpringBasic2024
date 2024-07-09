@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.green.session.dto.Member;
 import com.green.session.service.MemberService;
@@ -55,6 +56,9 @@ public class MemberController {
       public String memLogin(Member member, HttpSession session) {
     	  // session.setAttribute()는 session에 값을 저장해준다.
     	  Member mem = service.memberSearch(member);
+    	  if(mem == null) {
+    		  return "member/loginForm";
+    	  }
     	  session.setAttribute("member", mem);
     	  System.out.println("member1 : "+ member.getMemId());
     	  return "member/loginOk";
@@ -97,6 +101,54 @@ public class MemberController {
   		return "/member/modifyForm";
     	  
       }
+      
+      @RequestMapping(value = "/modify", method = RequestMethod.POST)
+  	  public ModelAndView modify(Member member, HttpServletRequest request) {
+  		
+  		ModelAndView mav = new ModelAndView();
+  		HttpSession session = request.getSession();
+  		
+  		Member mem = service.memberModify(member);
+  		if(mem == null) {
+  			mav.setViewName("/member/modifyForm");
+  		} else { 
+  			session.setAttribute("member", mem);
+  			
+  			mav.addObject("memAft", mem);
+  			mav.setViewName("/member/modifyOk");
+  		}
+  		
+  		return mav;
+  	 }
+      
+      //회원탈퇴(삭제)
+      @RequestMapping("/removeForm")
+      public ModelAndView removeForm(HttpServletRequest request) {
+    	  
+    	ModelAndView mav = new ModelAndView();
+  		
+  		HttpSession session =  request.getSession();
+  		Member member = (Member) session.getAttribute("member");
+  		
+  		mav.addObject("member", member);
+  		mav.setViewName("/member/removeForm");
+  		
+  		return mav;
+      }
+      
+      @RequestMapping(value = "/remove", method = RequestMethod.POST)
+  	  public String memRemove(Member member, HttpServletRequest request) {
+  		
+  		int result = service.memberRemove(member);
+  		
+  		if(result == 0)
+  			return "/member/removeForm";
+  		
+  		HttpSession session = request.getSession();
+  		session.invalidate();
+  		
+  		return "/member/removeOk";
+  	 }
       
       //MyPage로 이동
       @RequestMapping("/mypageForm")

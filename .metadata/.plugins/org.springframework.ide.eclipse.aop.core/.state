@@ -4,6 +4,7 @@
 <aop-project name="testAnnoCTX"/>
 <aop-project name="MVC_02"/>
 <aop-project name="cookie"/>
+<aop-project name="dataBasic"/>
 <aop-project name="MVC_Join"/>
 <aop-project name="session"/>
 <aop-project name="MVC_Service"/>

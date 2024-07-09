@@ -1,5 +1,5 @@
 #Tomcat publish data
-#Sun Jul 07 22:56:37 KST 2024
+#Tue Jul 09 20:37:36 KST 2024
 org.eclipse.jst.jee.server\:session=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\session
 org.eclipse.jst.jee.server\:example=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\example
 org.eclipse.jst.jee.server\:MVC_Join=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_Join
