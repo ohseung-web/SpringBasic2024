@@ -1,5 +1,0 @@
-package com.green.example.dao;
-
-public interface IMemberDAO {
-
-}

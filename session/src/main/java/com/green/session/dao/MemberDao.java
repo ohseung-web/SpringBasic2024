@@ -1,5 +1,6 @@
 package com.green.session.dao;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import com.green.session.dto.Member;
@@ -35,27 +43,46 @@ public class MemberDao implements IMemberDao {
 //    }
 	
     //JDBC 연결하기  =======================================================
-    private String URL="jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC";
-	private String userId ="root";
-	private String userPw ="12345678";
-	
-	private Connection con = null; //데이터 베이스에 접근할수 있도록 설정
-	private PreparedStatement pstmt = null; //데이터 베이스에서 쿼리를 실행시켜주는 객체
-	private ResultSet rs = null; //데이터 베이스의 테이블의 결과를 리턴받아 자바에 저장해주는 객체
+//    private String URL="jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC";
+//	private String userId ="root";
+//	private String userPw ="12345678";
+//	
+//	private Connection con = null; //데이터 베이스에 접근할수 있도록 설정
+//	private PreparedStatement pstmt = null; //데이터 베이스에서 쿼리를 실행시켜주는 객체
+//	private ResultSet rs = null; //데이터 베이스의 테이블의 결과를 리턴받아 자바에 저장해주는 객체
+//	
+//	public void getCon() {
+//		
+//		try {
+//			//1. 해당 데이터 베이스를 사용한다고 선언(클래스를 등록=mysql을 사용)
+//				  Class.forName("com.mysql.cj.jdbc.Driver");
+//		    //2. 해당 데이터 베이스에 접속 반드시 java.sql에 존재하는 Connection을 사용한다.
+//				  con = DriverManager.getConnection(URL, userId, userPw);	
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+	//======================================================================
+    
+	Connection con;
+	PreparedStatement pstmt;
+	ResultSet rs;
 	
 	public void getCon() {
 		
-		try {
-			//1. 해당 데이터 베이스를 사용한다고 선언(클래스를 등록=mysql을 사용)
-				  Class.forName("com.mysql.cj.jdbc.Driver");
-		    //2. 해당 데이터 베이스에 접속 반드시 java.sql에 존재하는 Connection을 사용한다.
-				  con = DriverManager.getConnection(URL, userId, userPw);	
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		 try {
+			 ApplicationContext ac = 
+						new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/**/root-context.xml");
+        	DataSource ds = ac.getBean("dataSource", DataSource.class);
+	
+				//Connection은 반드시 Exception 처리한다.
+				 con = ds.getConnection(); // 데이터베이스의 연결을 얻는다.
+		 }catch(Exception e) {
+			e.printStackTrace(); 
+		 }
+		
 	}
-	//======================================================================
-
+		
 	private HashMap<String, Member> dbMap;
 	public MemberDao() {
 		//dbMap = new HashMap<String, Member>();
@@ -96,7 +123,7 @@ public class MemberDao implements IMemberDao {
 
 	@Override
 	public Member memberSelect(Member member) {
-		getCon();
+	    getCon();
 		Member mem = null;
 		
 		try {
