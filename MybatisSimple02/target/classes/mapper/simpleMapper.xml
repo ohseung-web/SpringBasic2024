@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- mapper namespace의 별칭인 typeAliases sDAO 이다.  -->
+<!-- 원래 namespace = "com.green.simple.dao.SimpleDAO" 이다. -->
+<mapper namespace="sDAO">
+
+<insert id="insertSimple" parameterType="simple">
+ INSERT INTO simple(bNO,bWriter,bTitle,bContent,bDate)
+ VALUES (null,#{bWriter},#{bTitle},#{bContent},current_date())
+</insert>
+
+</mapper>

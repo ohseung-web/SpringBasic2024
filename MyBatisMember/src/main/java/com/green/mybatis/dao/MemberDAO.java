@@ -10,10 +10,8 @@ public interface MemberDAO {
 		// DAO 와 mapper 는 직접 연결된다.
 		// DAO 의 메소드명이 mapper 의 id 가 된다.
 
-		
 		// 1. 전체 목록 가져오기
 		public ArrayList<MemberDTO> selectMemberList();
-		
 		
 		// 2. 삽입하기
 		public void insertMember(String mId, String mName);
