@@ -3,6 +3,7 @@
 <aop-project name="example"/>
 <aop-project name="member03"/>
 <aop-project name="mybatis"/>
+<aop-project name="MybatisContact"/>
 <aop-project name="testAnnoCTX"/>
 <aop-project name="ch5"/>
 <aop-project name="MyBatisTest"/>

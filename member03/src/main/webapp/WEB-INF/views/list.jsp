@@ -6,11 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+  table{
+    border-collapse: collapse;
+  }
+</style>
 </head>
 <body>
    
-    <table>
-        <tr>
+    <table width="700" border="1">
+        <tr height="40">
             <th>id</th>
             <th>email</th>
             <th>password</th>
@@ -21,20 +26,20 @@
             <th>삭제</th>
         </tr>
         <c:forEach items="${memberList}" var="member">
-            <tr>
-                <td>${member.id}</td>
-                <td>
+            <tr height="40">
+                <td align="center">${member.id}</td>
+                <td align="center">
 
                     <a href="/member03/detail?id=${member.id}">${member.memberEmail}</a>
                 </td>
-                <td>${member.memberPassword}</td>
-                <td>${member.memberName}</td>
-                <td>${member.memberAge}</td>
-                <td>${member.memberMobile}</td>
-                <td>
+                <td align="center">${member.memberPassword}</td>
+                <td align="center">${member.memberName}</td>
+                <td align="center">${member.memberAge}</td>
+                <td align="center">${member.memberMobile}</td>
+                <td align="center">
                     <a href="/member03/detail?id=${member.id}">조회</a>
                 </td>
-                <td>
+                <td align="center">
                     <button onclick="deleteMember('${member.id}')">삭제</button>
                 </td>
             </tr>

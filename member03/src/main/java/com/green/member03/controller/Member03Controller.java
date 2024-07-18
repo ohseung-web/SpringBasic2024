@@ -28,10 +28,10 @@ public class Member03Controller {
 	}
 	
 	@RequestMapping(value="/save",method = RequestMethod.POST)
-	public String save(@ModelAttribute Member03DTO memberDTO) {
+	public String save(@ModelAttribute("m") Member03DTO memberDTO) {
         int saveResult = memService.save(memberDTO);
         if (saveResult > 0) {
-            return "login";
+            return "saveOk";
         } else {
             return "save";
         }

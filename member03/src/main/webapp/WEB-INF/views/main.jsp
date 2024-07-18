@@ -14,10 +14,10 @@
 
    <script>
     const update = () => {
-        location.href = "/member/update";
+        location.href = "/member03/update";
     }
     const logout = () => {
-        location.href = "/member/logout";
+        location.href = "/member03/logout";
     }
 </script>    
 </html>
