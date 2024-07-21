@@ -33,10 +33,5 @@
         update member_table set memberAge=#{memberAge}, memberMobile=#{memberMobile}
         where id=#{id}
     </update>
-    
-    
-    
-    
-    
-    
+   
  </mapper>           

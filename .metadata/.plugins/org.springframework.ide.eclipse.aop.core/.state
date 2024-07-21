@@ -4,6 +4,7 @@
 <aop-project name="member03"/>
 <aop-project name="mybatis"/>
 <aop-project name="MybatisContact"/>
+<aop-project name="MyBatisBoard"/>
 <aop-project name="testAnnoCTX"/>
 <aop-project name="ch5"/>
 <aop-project name="MyBatisTest"/>
@@ -11,9 +12,9 @@
 <aop-project name="cookie"/>
 <aop-project name="dataBasic"/>
 <aop-project name="MVC_Join"/>
+<aop-project name="codingBoard"/>
 <aop-project name="session"/>
 <aop-project name="MybatisSimple03"/>
-<aop-project name="MyBatis_Simple04"/>
 <aop-project name="MVC_Service"/>
 <aop-project name="MyBatisMember"/>
 <aop-project name="service"/>

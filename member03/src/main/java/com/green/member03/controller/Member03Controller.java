@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,5 +79,26 @@ public class Member03Controller {
     public String delete(@RequestParam("id") Long id) {
     	memService.delete(id);
         return "redirect:/list";
+    }
+    
+   // 수정화면 요청
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model) {
+        // 세션에 저장된 나의 이메일 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        Member03DTO memberDTO = memService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        return "update";
+    }
+
+    // 수정 처리
+    @PostMapping("/update")
+    public String update(@ModelAttribute Member03DTO memberDTO) {
+        boolean result = memService.update(memberDTO);
+        if (result) {
+            return "redirect:/list?id=" + memberDTO.getId();
+        } else {
+            return "index";
+        }
     }
 }
