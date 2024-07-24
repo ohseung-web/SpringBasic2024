@@ -22,9 +22,15 @@
 <delete id="delete" parameterType="long">
   DELETE FROM board_table WHERE id=#{id}
 </delete>
-<update id="update" parameterType="long">
+<update id="update" parameterType="BoardDTO">
   UPDATE board_table SET boardTitle=#{boardTitle}, boardContents = #{boardContents} 
   WHERE id = #{id}
 </update>
-
+<!-- 페이징 쿼리 -->
+<select id="pagingList" parameterType="java.util.HashMap" resultType="BoardDTO">
+   select * from board_table order by id desc limit #{start}, #{end}
+</select>
+<select id="boardcount" resultType="int">
+   SELECT count(*) FROM board_table
+</select>
 </mapper>        

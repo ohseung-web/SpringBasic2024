@@ -50,14 +50,12 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public List<BoardDTO> pagingList(Map<String, Integer> pagingParams) {
-		// TODO Auto-generated method stub
-		return null;
+		return sql.selectList("Board.pagingList", pagingParams);
 	}
 
 	@Override
 	public int boardCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.selectOne("Board.boardcount");
 	}
 
 }

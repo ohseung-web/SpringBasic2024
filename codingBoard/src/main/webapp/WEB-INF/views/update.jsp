@@ -7,21 +7,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <form action="/codingboard/update" method="post" name="updateForm">
+   <!--  <form action="/codingboard/update" method="post" name="updateForm"> -->
+    <form method="post" >
         <input type="hidden" name="id" value="${bdto.id}" readonly><br>
         <input type="text" name="boardWriter" value="${bdto.boardWriter}" readonly><br>
         <input type="text" name="boardPass" id="boardPass" placeholder="비밀번호"><br>
         <input type="text" name="boardTitle" value="${bdto.boardTitle}"><br>
         <textarea name="boardContents" cols="30" rows="10">${bdto.boardContents}</textarea><br>
-        <input type="button" value="수정" onclick="updateReqFn()">
+        <input type="button" value="수정" onclick="updateReqFn(this.form)">
+        <!-- <input type="button" value="수정하기" onclick="fn_contactUpdate(this.form)" /> -->
     </form>
 </body>
 <script>
-    const updateReqFn = () => {
+
+	/* 	function fn_contactUpdate(f) {
+			f.action = 'contactUpdate';
+			f.submit();
+		}  */
+
+    const updateReqFn = (f) => {
+    	const id = '${bdto.id}';
+    	const page = '${page}';
         const passInput = document.getElementById("boardPass").value;
         const passDB = '${bdto.boardPass}';
         if (passInput == passDB) {
-            document.updateForm.submit();
+        	f.action = "/codingboard/update?page=" + page;
+        	f.submit();
+            //document.updateForm.submit();
         } else {
             alert("비밀번호가 일치하지 않습니다!!");
         }

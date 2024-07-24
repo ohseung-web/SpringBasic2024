@@ -1,5 +1,5 @@
 #Tomcat publish data
-#Mon Jul 22 08:27:40 KST 2024
+#Thu Jul 25 07:32:27 KST 2024
 org.eclipse.jst.jee.server\:MyBatis_Simple04=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MyBatis_Simple04
 org.eclipse.jst.jee.server\:MVC_Join=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_Join
 org.eclipse.jst.jee.server\:MyBatisTest=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MyBatisTest

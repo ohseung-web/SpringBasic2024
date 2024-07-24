@@ -4,6 +4,7 @@
 <configuration>
   <typeAliases>
      <typeAlias type="com.green.codingboard.dto.BoardDTO" alias="BoardDTO"/>
+     <typeAlias type="com.green.codingboard.dto.CommentDTO" alias="commentDTO"/>
   </typeAliases>
 </configuration>        
         

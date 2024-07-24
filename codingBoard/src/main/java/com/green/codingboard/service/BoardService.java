@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.green.codingboard.dto.BoardDTO;
+import com.green.codingboard.dto.PageDTO;
 
 public interface BoardService {
     
@@ -19,9 +20,10 @@ public interface BoardService {
     public void delete(Long id);
     // 게시글 수정
     public void update(BoardDTO bdto);
-    // 게시글 페이징
+    // 게시글 페이징 목록 담기
     public List<BoardDTO> pagingList(int page);
-
-
+    // 페이지
+    public PageDTO pagingParam(int page);
+     
    
 }
