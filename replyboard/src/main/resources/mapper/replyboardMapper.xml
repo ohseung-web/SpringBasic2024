@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- typeAlias type="com.green.replyboard.dto.ReplyBoardDTO" alias="rDTO"   --> 
+ <mapper namespace="Rboard">
+ 
+  <!-- 게시글 전체를 읽어오는 SQL -->
+  <select id="getList" resultType="rDTO">
+     SELECT * FROM replyBoard ORDER BY ref DESC, re_level ASC, re_step ASC
+  </select>
+  <!-- 게시글을 저장하는 SQL -->
+  <insert id="insert" parameterType="rDTO">
+     INSERT INTO
+     replyBoard(writer,email,subject,password,ref,re_step,re_level,content,boardAvailable)
+	    SELECT #{writer},#{email},#{subject},#{password},IFNULL(MAX(ref)+1, 1),1,1,#{content},1 
+		FROM replyBoard
+  </insert>
+    <!-- 하나의 게시글을 읽을때 조회수 증가 SQL -->
+	<select id="readcount" parameterType="int">
+	   UPDATE replyBoard SET readcount = readcount + 1 
+	   WHERE num = #{num}
+	</select>
+	 <!-- 하나의 게시글을 읽어오는 SQL -->
+	<select id="read"  parameterType="int"  resultType="rDTO">
+	    SELECT * FROM replyBoard where num=#{num}
+	</select>
+  
+   <!-- 페이징처리 SQL -->
+	<select id="pagingList" parameterType="java.util.HashMap" resultType="rDTO">
+	   SELECT * FROM replyBoard order by num desc limit #{start}, #{end}
+	</select>
+	<select id="boardcount" resultType="int">
+	   SELECT count(*) FROM replyBoard
+	</select>
+	
+ </mapper>    
+ 
+ 

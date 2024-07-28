@@ -12,6 +12,7 @@
 <aop-project name="cookie"/>
 <aop-project name="dataBasic"/>
 <aop-project name="MVC_Join"/>
+<aop-project name="replyboard"/>
 <aop-project name="codingBoard"/>
 <aop-project name="session"/>
 <aop-project name="MybatisSimple03"/>

@@ -45,14 +45,15 @@
     <button type="button" onclick="listFn()">목록</button>
     <button type="button" onclick="updateFn()">수정</button>
     <button type="button" onclick="deleteFn()">삭제</button>
+    <button type="button" onclick="deleteFn()">답글</button>
     
-    <div class="comment">
+    <!-- <div class="comment">
        <input type="text" id="commentWriter" placeholder="작성자"><br>
        <input type="text" id="commentContents" placeholder="내용"><br>
        <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
-    </div>
+    </div> -->
 
-<div id="comment-list">
+<%-- <div id="comment-list">
     <table>
         <tr>
             <th>댓글번호</th>
@@ -69,7 +70,7 @@
             </tr>
         </c:forEach>
     </table>
-</div>
+</div> --%>
 </body>
 <script>
     const page = '${page}';
@@ -87,7 +88,7 @@
     }
 
     /* 댓글작성 */
-    const commentWrite = () => {
+   /*  const commentWrite = () => {
         const writer = document.getElementById("commentWriter").value;
         const contents = document.getElementById("commentContents").value;
         const board = '${board.id}';
@@ -125,6 +126,6 @@
                 console.log("실패");
             }
         });
-    }    
+    }     */
 </script>
 </html>

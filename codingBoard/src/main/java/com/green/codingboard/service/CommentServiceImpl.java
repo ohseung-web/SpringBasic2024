@@ -17,7 +17,6 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public void save(CommentDTO commentDTO) {
 		comdao.save(commentDTO);
-		
 	}
 
 	@Override

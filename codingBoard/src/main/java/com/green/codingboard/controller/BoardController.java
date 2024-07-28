@@ -22,9 +22,19 @@ public class BoardController {
 	@Autowired
 	BoardServiceImpl bservice;
 	
+	// index로 넘길때 페이징한 자료까지 같이 넘긴다.
 	@GetMapping("/boardListpaging")
-	public String goindex(Model model) {
-		model.addAttribute("section", "board.jsp");
+	public String goindex(Model model,
+		@RequestParam(value="page", required=false, defaultValue="1") int page ) {
+		//System.out.println("page :" + page);
+		//해당 페이지에서 보여줄 글 목록
+		List<BoardDTO> pagingList = bservice.pagingList(page);
+		//System.out.println("pagingList :" + pagingList);
+		PageDTO pdto = bservice.pagingParam(page);
+		model.addAttribute("boardList", pagingList);
+		model.addAttribute("paging", pdto);
+		
+		model.addAttribute("section", "List.jsp");
 		return "index";
 	}
 	

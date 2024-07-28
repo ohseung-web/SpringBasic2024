@@ -1,12 +1,12 @@
 #Tomcat publish data
-#Thu Jul 25 07:32:27 KST 2024
+#Mon Jul 29 08:03:13 KST 2024
 org.eclipse.jst.jee.server\:MyBatis_Simple04=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MyBatis_Simple04
 org.eclipse.jst.jee.server\:MVC_Join=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_Join
 org.eclipse.jst.jee.server\:MyBatisTest=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MyBatisTest
 org.eclipse.jst.jee.server\:MybatisContact=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MybatisContact
 org.eclipse.jst.jee.server\:cookie=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\cookie
 org.eclipse.jst.jee.server\:codingBoard=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\codingBoard
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Admin\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\codingBoard\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Admin\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\replyboard\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
 org.eclipse.jst.jee.server\:MVC_02=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_02
 org.eclipse.jst.jee.server\:MVC_03=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\MVC_03
 org.eclipse.jst.jee.server\:dataBasic=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\dataBasic
@@ -16,6 +16,7 @@ org.eclipse.jst.jee.server\:MyBatisMember=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.
 org.eclipse.jst.jee.server\:example=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\example
 org.eclipse.jst.jee.server\:session=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\session
 org.eclipse.jst.jee.server\:member=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\member
+org.eclipse.jst.jee.server\:replyboard=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\replyboard
 org.eclipse.jst.jee.server\:redirect=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\redirect
 org.eclipse.jst.jee.server\:ch5=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\ch5
 org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Admin\\.m2\\repository\\org\\springframework\\spring-web\\4.3.23.RELEASE\\spring-web-4.3.23.RELEASE.jar=C\:\\tomcat-8.5.95\\apache-tomcat-8.5.95\\wtpwebapps\\dataBasic\\WEB-INF\\lib\\spring-web-4.3.23.RELEASE.jar
