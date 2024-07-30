@@ -2,8 +2,8 @@
 <aop-reference-model>
 <aop-project name="example"/>
 <aop-project name="member03"/>
-<aop-project name="mybatis"/>
 <aop-project name="MybatisContact"/>
+<aop-project name="mybatis"/>
 <aop-project name="MyBatisBoard"/>
 <aop-project name="testAnnoCTX"/>
 <aop-project name="ch5"/>

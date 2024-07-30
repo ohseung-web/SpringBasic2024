@@ -21,19 +21,53 @@
 	   UPDATE replyBoard SET readcount = readcount + 1 
 	   WHERE num = #{num}
 	</select>
-	 <!-- 하나의 게시글을 읽어오는 SQL -->
+	<!-- 하나의 게시글을 읽어오는 SQL -->
 	<select id="read"  parameterType="int"  resultType="rDTO">
 	    SELECT * FROM replyBoard where num=#{num}
 	</select>
   
    <!-- 페이징처리 SQL -->
 	<select id="pagingList" parameterType="java.util.HashMap" resultType="rDTO">
-	   SELECT * FROM replyBoard order by num desc limit #{start}, #{end}
+	   SELECT * FROM replyBoard ORDER BY ref DESC,re_level ASC,re_step ASC limit #{start}, #{end}
 	</select>
+	<!--전체 게시글의 갯수 구하는 SQL -->
 	<select id="boardcount" resultType="int">
 	   SELECT count(*) FROM replyBoard
 	</select>
 	
+	<!-- 하나의 게시글을 수정하는 SQL -->
+	 <update id="update" parameterType="rDTO">
+      UPDATE replyBoard SET subject=#{subject}, content=#{content}
+      WHERE num=#{num}
+    </update>
+    
+     <!-- 하나의 게시글을 삭제하는 SQL(단, delete가아니라 boardAvailable=0으로 수정한다. -->
+	  <delete id="delete" parameterType="int">
+	     UPDATE replyBoard SET boardAvailable=0 WHERE num=#{num}
+	  </delete>
+	 <!--  <select id="repyselect" parameterType="int">
+	     select ref from replyBoard where boardAvailable=0 
+	  </select> -->
+	  <update id="replydelete" parameterType="int">
+	      <selectKey keyProperty="ref" resultType="int" order="BEFORE">
+             select ref from replyBoard where boardAvailable=0     
+         </selectKey>  
+	     UPDATE replyBoard SET boardAvailable=0 WHERE ref=#{ref}
+	  </update>
+	   
+	 <!-- 답변글 작성하는 SQL -->
+	    <insert id="replyInsert" parameterType="rDTO">
+	     INSERT INTO
+          replyBoard(writer,email,subject,password,ref,re_step,re_level,content,boardAvailable) 
+          values(#{writer},#{email},#{subject},#{password},#{ref},#{re_step}+1,#{re_level}+1,#{content},1)
+	    </insert>
+	<!-- 답변글 작성시 update SQL -->
+		<update id="replySeqUpdate" parameterType="rDTO">
+	     <![CDATA[
+	     update replyBoard set re_level = re_level + 1
+	     where ref=#{ref} and re_level > #{re_level}
+	     ]]>
+	   </update>
  </mapper>    
  
  

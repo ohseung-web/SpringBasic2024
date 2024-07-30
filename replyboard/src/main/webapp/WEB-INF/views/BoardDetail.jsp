@@ -58,10 +58,10 @@
         </tr>
         <tr height="40">
            <td align="center" colspan="4">
-              <input type="button" value="답글쓰기" onclick="location.href='/replyboard/reply?num=${rdto.num }&ref=${rdto.ref }&re_step=${rdto.re_step}&re_level=${rdto.re_level }'">
-              <input type="button" value="수정하기" onclick="location.href='/replyboard/update?num=${rdto.num }'">
-              <input type="button" value="삭제하기" onclick="location.href='/replyboard/delete?num=${rdto.num }'">
-              <input type="button" value="목록보기" onclick="location.href='/replyboard/'">
+              <input type="button" value="답글쓰기" onclick="location.href='/replyboard/reply?num=${rdto.num }&page=${paging.page}&ref=${rdto.ref }&re_step=${rdto.re_step}&re_level=${rdto.re_level}'">
+              <input type="button" value="수정하기" onclick="location.href='/replyboard/modify?num=${rdto.num }&page=${paging.page}'">
+              <input type="button" value="삭제하기" onclick="location.href='/replyboard/remove?num=${rdto.num }&page=${paging.page}'">
+              <input type="button" value="목록보기" onclick="location.href='/replyboard?&page=${paging.page}'">
            </td>
         </tr>   
      </table>

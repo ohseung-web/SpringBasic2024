@@ -41,20 +41,21 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
 
 	@Override
 	public void modify(ReplyBoardDTO rdto) {
-		// TODO Auto-generated method stub
+		rdao.update(rdto);
 		
 	}
 
 	@Override
 	public void remove(int num) {
-		// TODO Auto-generated method stub
-		
+	    rdao.delete(num);
 	}
 
 	@Override
 	public void replyProcess(ReplyBoardDTO rdto) {
-		// TODO Auto-generated method stub
-		
+ 	//  부모글의 re_level 보다 큰 값들을 모두 1씩 업데이트하기
+		rdao.replySeqUpdate(rdto);
+	//  답변글 삽입시 re_step+1, re_level+1	
+		rdao.replyInsert(rdto);
 	}
 
 	int pageSize = 3; // 한 페이지당 보여지는 글 갯수
@@ -110,4 +111,29 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
 		rdao.readcount(num);
 	}
 
+	@Override
+	public void repyRemove(int ref) {
+		rdao.replydelete(ref);
+	}
+
+	
+	
+//	public void replyProcess(Board vo) {
+//		// - 답글만들기
+//		// 1. 부모글(원글)의 정보를 가져오기(vo->idx)
+//		Board parent=boardMapper.read(vo.getIdx());
+//		// 2. 부모글의 boardGroup의 값을->답글(vo)정보에 저장하기
+//		vo.setBoardGroup(parent.getBoardGroup());
+//		// 3. 부모글의 boardSequence의 값을 1을 더해서 ->답글(vo)정보에 저장하기
+//		vo.setBoardSequence(parent.getBoardSequence()+1);
+//		// 4. 부모글의 boardLevel의 값을 1을 더해서 ->답글(vo)정보에 저장하기
+//        vo.setBoardLevel(parent.getBoardLevel()+1);
+//        // 5. 같은 boardGroup에 있는 글 중에서
+//        //    부모글의 boardSequence보다 큰 값들을 모두 1씩 업데이트하기
+//		boardMapper.replySeqUpdate(parent);
+//		// 6. 답글(vo)을 저정하기
+//		boardMapper.replyInsert(vo);
+//	}
+	
+	
 }

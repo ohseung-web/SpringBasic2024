@@ -38,26 +38,23 @@ public class ReplyBoardDAOImpl implements ReplyBoardDAO {
 
 	@Override
 	public void update(ReplyBoardDTO rdto) {
-		// TODO Auto-generated method stub
+		sql.update("Rboard.update", rdto);
 		
 	}
 
 	@Override
 	public void delete(int num) {
-		// TODO Auto-generated method stub
-		
+		sql.delete("Rboard.delete", num);
 	}
 
 	@Override
 	public void replySeqUpdate(ReplyBoardDTO parent) {
-		// TODO Auto-generated method stub
-		
+		sql.update("Rboard.replySeqUpdate", parent);
 	}
 
 	@Override
 	public void replyInsert(ReplyBoardDTO rdto) {
-		// TODO Auto-generated method stub
-		
+		sql.insert("Rboard.replyInsert", rdto);
 	}
 
 	@Override
@@ -74,5 +71,11 @@ public class ReplyBoardDAOImpl implements ReplyBoardDAO {
 	public void readcount(int num) {
 		sql.update("Rboard.readcount", num);
 	}
+
+	@Override
+	public void replydelete(int ref) {
+		sql.update("Rboard.replydelete", ref);
+	}
+
 
 }

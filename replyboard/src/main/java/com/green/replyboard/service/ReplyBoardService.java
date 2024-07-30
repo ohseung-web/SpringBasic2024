@@ -18,8 +18,11 @@ public interface ReplyBoardService {
     public List<ReplyBoardDTO> pagingList(int page);
     // 페이지
     public PageDTO pagingParam(int page);
-    
+    // 게시글 수정
     public void modify(ReplyBoardDTO rdto);
+    // 게시글 삭제
 	public void remove(int num);
+	public void repyRemove(int ref);
+	// 답글 처리
 	public void replyProcess(ReplyBoardDTO rdto);
 }
