@@ -3,6 +3,7 @@ package com.green.replyboard.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.green.replyboard.dto.PageDTO;
 import com.green.replyboard.dto.ReplyBoardDTO;
 
 public interface ReplyBoardDAO {
@@ -17,7 +18,7 @@ public interface ReplyBoardDAO {
 	    // 게시글 페이징
 	    public List<ReplyBoardDTO> pagingList(Map<String, Integer> pagingParams); 
 	    // 게시글 전체 갯수 
-	    public int boardCount(); 
+	    public int boardCount(String searchType, String keyword); 
 	    // 게시글 수정
 	   public void update(ReplyBoardDTO rdto);
 	   // 게시글 삭제 
@@ -28,5 +29,10 @@ public interface ReplyBoardDAO {
 	   public void replyInsert(ReplyBoardDTO rdto);
 	   // 게시 댓글 삭제
 	   public void replydelete(int ref);
-	   public void insertSelectKey(ReplyBoardDTO rdto); 
+	   public void insertSelectKey(ReplyBoardDTO rdto);
+	   
+	 //검색
+	  public List<ReplyBoardDTO> search(String searchType, String keyword);
+	// 검색 갯수
+	  public int searchCount(String searchType, String keyword);
 }

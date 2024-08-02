@@ -5,9 +5,59 @@
  <!-- typeAlias type="com.green.replyboard.dto.ReplyBoardDTO" alias="rDTO"   --> 
  <mapper namespace="Rboard">
  
-  <!-- 게시글 전체를 읽어오는 SQL -->
+	<select id="search" parameterType="hashMap" resultType="rDTO">
+	 SELECT * FROM replyBoard
+	 <if test="searchType != null">
+	    <if test='searchType.equals("writer")'>
+		  WHERE writer LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 <if test='searchType.equals("subject")'>
+		  WHERE subject LIKE concat('%', #{keyword}, '%')
+		 </if>
+		  <if test='searchType.equals("content")'>
+		  WHERE content LIKE concat('%', #{keyword}, '%')
+		 </if>
+	 </if>
+	 ORDER BY ref DESC,re_level ASC,re_step ASC
+	</select>
+	
+	<select id="searchCount" parameterType="hashMap" resultType="int">
+	 SELECT count(*) FROM replyBoard
+	 <if test="searchType != null">
+	     <if test='searchType.equals("writer")'>
+		  WHERE writer LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 <if test='searchType.equals("subject")'>
+		  WHERE subject LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 <if test='searchType.equals("content")'>
+		  WHERE content LIKE concat('%', #{keyword}, '%')
+		 </if>
+	 </if> 
+	 
+	</select>
+     
+  <!-- 동적 SQL 검색기능 작성  -->
+	 <!-- <sql id="search">
+	     <if test="searchType =='writer'">
+	       <![CDATA[ where writer like concat('%',#{keyword},'%')]]>
+	      where writer like concat('%',#{keyword},'%')
+	     </if>
+	     <if test="searchType =='subject'">
+	       <![CDATA[ where subject like concat('%',#{keyword},'%')]]>
+	      where subject like concat('%',#{keyword},'%')
+	     </if>
+	     <if test="searchType =='content'">
+	        <![CDATA[where content like concat('%',#{keyword},'%')]]>
+	        where content like concat('%',#{keyword},'%')
+	     </if>
+	 </sql> -->
+ 
+  <!-- 게시글 전체를 읽어오는 SQL => 검색을 하지 않을 때 사용하는 SQL -->
   <select id="getList" resultType="rDTO">
-     SELECT * FROM replyBoard ORDER BY ref DESC, re_level ASC, re_step ASC
+     SELECT * FROM replyBoard 
+     <!-- <include refid="search" /> -->
+     ORDER BY ref DESC, re_level ASC, re_step ASC
   </select>
   <!-- 게시글을 저장하는 SQL -->
   <insert id="insert" parameterType="rDTO">
@@ -28,10 +78,12 @@
   
    <!-- 페이징처리 SQL -->
 	<select id="pagingList" parameterType="java.util.HashMap" resultType="rDTO">
-	   SELECT * FROM replyBoard ORDER BY ref DESC,re_level ASC,re_step ASC limit #{start}, #{end}
+	   SELECT * FROM replyBoard
+	  <!--  <include refid="search" />  -->
+	   ORDER BY ref DESC,re_level ASC,re_step ASC limit #{start}, #{end}
 	</select>
 	<!--전체 게시글의 갯수 구하는 SQL -->
-	<select id="boardcount" resultType="int">
+	<select id="boardcount" resultType="int" parameterType="java.util.HashMap">
 	   SELECT count(*) FROM replyBoard
 	</select>
 	
@@ -45,14 +97,17 @@
 	  <delete id="delete" parameterType="int">
 	     UPDATE replyBoard SET boardAvailable=0 WHERE num=#{num}
 	  </delete>
-	 <!--  <select id="repyselect" parameterType="int">
-	     select ref from replyBoard where boardAvailable=0 
-	  </select> -->
+	 
+	  <!-- selectKey를 통해서 나오는 데이터의 row 수는 무조건 1개여야합니다. -->
 	  <update id="replydelete" parameterType="int">
-	      <selectKey keyProperty="ref" resultType="int" order="BEFORE">
-             select ref from replyBoard where boardAvailable=0     
-         </selectKey>  
-	     UPDATE replyBoard SET boardAvailable=0 WHERE ref=#{ref}
+	      <!-- <selectKey keyColumn="ref" keyProperty="ref" resultType="int" order="BEFORE">
+             select ref as ref from replyBoard where boardAvailable=0 and num=#{num}     
+         </selectKey>   -->
+         <!-- mySQL은 update의 테이블명과 서브select문의 테이블명이 같으면 안되므로 as re 형식으로 테이블 명을 지정한다. -->
+         <!-- 원문이 삭제되면 답글도 자동으로 삭제되도록하는 SQL(단, 삭제가 아니라 boardAvailable = 0으로 update) -->
+	     <!-- UPDATE replyboard 
+         SET boardAvailable=0 
+         WHERE ref=(select re.ref from (select ref from replyboard where boardAvailable=0 and num=#{num}) as re) and boardAvailable=1 -->
 	  </update>
 	   
 	 <!-- 답변글 작성하는 SQL -->
@@ -68,6 +123,9 @@
 	     where ref=#{ref} and re_level > #{re_level}
 	     ]]>
 	   </update>
+	   
+	   <!--검색할때 필요한 SQL -->
+	   
  </mapper>    
  
  

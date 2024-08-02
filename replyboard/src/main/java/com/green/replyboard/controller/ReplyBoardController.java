@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.replyboard.dto.PageDTO;
@@ -20,17 +22,30 @@ public class ReplyBoardController {
 	@Autowired
 	ReplyBoardServiceImpl rservice;
 	
-	@GetMapping("/")
-	public String getList(Model model,
-			@RequestParam(value="page", required=false, defaultValue="1") int page ) {
+	//@GetMapping("/") //검색에서 넘어오는 type와 keyword를 PageDTO에 담아주기
+	@RequestMapping(value="/", method= {RequestMethod.GET, RequestMethod.POST})
+	public String getList(Model model, PageDTO pdto,
+			@RequestParam(value="page", required=false, defaultValue="1") int page,
+			@RequestParam(value = "searchType",required = false, defaultValue = "") String searchType,
+			@RequestParam(value = "keyword",required = false, defaultValue = "") String keyword) {
+		
+		List<ReplyBoardDTO> pagingList = rservice.pagingList(page);
+		System.out.println(searchType);
+		System.out.println(keyword);
+		
+//		List<ReplyBoardDTO> searchList = rservice.search(searchType, keyword); 
+//		model.addAttribute("slist", searchList);
+		
+		pdto = rservice.pagingParam(page);
+	    model.addAttribute("boardList", pagingList);
+	    model.addAttribute("paging", pdto);
+
+		return "BoardList"; // View
+		
 //		List<ReplyBoardDTO> list= rservice.getList();
 //		// 객체바인딩
 //		model.addAttribute("list", list); // Model
-		List<ReplyBoardDTO> pagingList = rservice.pagingList(page);
-		PageDTO pdto = rservice.pagingParam(page);
-		model.addAttribute("boardList", pagingList);
-		model.addAttribute("paging", pdto);
-		return "BoardList"; // View
+	
  	}
 	
 	//BoardWriterForm 화면으로 이동
@@ -50,7 +65,7 @@ public class ReplyBoardController {
 	// 하나의 게시글 정보보기로 이동
 	@GetMapping("/detail")
 	public String get(@RequestParam("num") int num, Model model,
-			@RequestParam(value="page", required=false, defaultValue="1") int page ) {
+			@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		// 조회된 게시글의 조회수가 증가
 		rservice.readcount(num);
 		ReplyBoardDTO rdto = rservice.get(num);
@@ -81,7 +96,7 @@ public class ReplyBoardController {
 	public String remove(@RequestParam("num") int num,
 			@RequestParam("ref") int ref) {
 		rservice.remove(num);
-		rservice.repyRemove(ref);
+//		rservice.repyRemove(ref);
 		return "redirect:/"; // 삭제하고 main으로 이동
 	}
 	

@@ -17,7 +17,21 @@ public class ReplyBoardDTO {
 	  private int boardAvailable; // 삭제된 글인지 여부
 	  
 	  public ReplyBoardDTO() {}
-
+	  public ReplyBoardDTO(String writer, String email,String subject, String password,
+			  int ref, int re_step, int re_level, String content, int boardAvailable) {
+		 // this.num = num;
+		  this.writer = writer;
+		  this.subject = subject;
+		  this.email = email;
+		  this.password = password;
+		 // this.reg_date = reg_date;
+		  this.ref = ref;
+		  this.re_step = re_step;
+		  this.re_level = re_level;
+		 // this.readcount = readcount;
+		  this.content = content;
+		  this.boardAvailable = boardAvailable;
+	  }
 		public int getNum() {
 			return num;
 		}

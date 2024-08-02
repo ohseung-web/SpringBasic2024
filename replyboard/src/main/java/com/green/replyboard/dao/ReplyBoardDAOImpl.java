@@ -1,5 +1,6 @@
 package com.green.replyboard.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.green.replyboard.dto.PageDTO;
 import com.green.replyboard.dto.ReplyBoardDTO;
 
 @Repository
@@ -62,10 +64,10 @@ public class ReplyBoardDAOImpl implements ReplyBoardDAO {
 		return sql.selectList("Rboard.pagingList", pagingParams);
 	}
 
-	@Override
-	public int boardCount() {
-		return sql.selectOne("Rboard.boardcount");
-	}
+//	@Override
+//	public int boardCount() {
+//		return sql.selectOne("Rboard.boardcount");
+//	}
 
 	@Override
 	public void readcount(int num) {
@@ -77,5 +79,32 @@ public class ReplyBoardDAOImpl implements ReplyBoardDAO {
 		sql.update("Rboard.replydelete", ref);
 	}
 
+	@Override
+	public int boardCount(String searchType, String keyword) {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+	    data.put("searchType", searchType);
+	    data.put("keyword", keyword);
+		return sql.selectOne("Rboard.boardcount", data);
+	}
+
+	// 검색에 해당하는 갯수
+	@Override
+	public int searchCount(String searchType, String keyword) {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+	    data.put("searchType", searchType);
+	    data.put("keyword", keyword);
+		return sql.selectOne("Rboard.searchCount", data);
+	}
+
+//	검색기능때문에 추가한 기능
+	@Override
+	public List<ReplyBoardDTO> search(String searchType, String keyword) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+	    data.put("searchType", searchType);
+	    data.put("keyword", keyword);
+	    
+		return sql.selectList("Rboard.search", data);
+	}
 
 }

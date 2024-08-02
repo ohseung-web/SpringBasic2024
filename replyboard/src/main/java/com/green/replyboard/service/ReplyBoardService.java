@@ -1,6 +1,7 @@
 package com.green.replyboard.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.green.replyboard.dto.PageDTO;
 import com.green.replyboard.dto.ReplyBoardDTO;
@@ -25,4 +26,6 @@ public interface ReplyBoardService {
 	public void repyRemove(int ref);
 	// 답글 처리
 	public void replyProcess(ReplyBoardDTO rdto);
+	// 검색
+	public List<ReplyBoardDTO> search(String searchType, String keyword);
 }

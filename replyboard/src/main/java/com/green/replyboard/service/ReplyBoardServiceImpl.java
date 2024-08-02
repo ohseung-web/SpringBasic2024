@@ -58,8 +58,9 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
 		rdao.replyInsert(rdto);
 	}
 
-	int pageSize = 3; // 한 페이지당 보여지는 글 갯수
+	int pageSize = 5; // 한 페이지당 보여지는 글 갯수
 	int blockSize = 3; // 하단에 보여줄 페이지 번호 갯수
+	int page = 1;
 	@Override
 	public List<ReplyBoardDTO> pagingList(int page) {
 		/*
@@ -74,34 +75,41 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
 		 //Map을 이용하여 동시에 2개이상의 파라미터 값을 저장하여 보낼 수 있다.
 		 Map<String, Integer> pagingParams = new HashMap<String, Integer>();
 		 pagingParams.put("start", StartRow); //시직 페이지 수
-		 pagingParams.put("end", endRow); // 종료 페이지 수
-		 
+		 pagingParams.put("end", endRow); // 종료 페이지 수 
 		 List<ReplyBoardDTO> pagingList = rdao.pagingList(pagingParams);
-		 
 		return pagingList;
 	}
 
 	@Override
 	public PageDTO pagingParam(int page) {
+		
+		 PageDTO pageDTO = new PageDTO();
+		 
+	     String searchType = pageDTO.getSearchType();
+	     String keyword = pageDTO.getKeyword();
+	     System.out.println("type" + searchType);
+	     System.out.println("keyword" + keyword);
 		 // 전체 글 갯수 조회
-        int boardCount = rdao.boardCount();
+//       int boardCount = rdao.boardCount(searchType, keyword);
+	     int boardCount = rdao.searchCount(searchType, keyword);
         // 전체 페이지 갯수 계산(10/3=3.33333 => 4)
         int maxPage = (int) (Math.ceil((double) boardCount / pageSize));
         // 시작 페이지 값 계산(1, 4, 7, 10, ~~~~)
         int startPage = (((int)(Math.ceil((double) page / blockSize))) - 1) * blockSize + 1;
         // 끝 페이지 값 계산(3, 6, 9, 12, ~~~~)
         int endPage = Math.min(startPage + blockSize - 1, maxPage) ; //둘 중에 작은 값을 출력한다.
-         System.out.println("endPage" + (startPage + blockSize - 1));
-         System.out.println("maxPage"+ maxPage);
+//         System.out.println("endPage" + (startPage + blockSize - 1));
+//         System.out.println("maxPage"+ maxPage);
  
         int number = boardCount - (page -1)*pageSize;
-         
-        PageDTO pageDTO = new PageDTO();
+       
         pageDTO.setPage(page);
         pageDTO.setMaxPage(maxPage);
         pageDTO.setStartpage(startPage);
         pageDTO.setEndPage(endPage);
         pageDTO.setNumber(number);
+        pageDTO.setSearchType(searchType);
+        pageDTO.setKeyword(keyword);
         
         return pageDTO;
 	}
@@ -114,6 +122,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
 	@Override
 	public void repyRemove(int ref) {
 		rdao.replydelete(ref);
+	}
+
+	// 검색으로 추가된 기능
+	@Override
+	public List<ReplyBoardDTO> search(String searchType, String keyword) {
+		return rdao.search(searchType, keyword);
 	}
 
 	

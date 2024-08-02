@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Bootstrap 이용한 검색 css 연결 부분 -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
 <style type="text/css">
    body{
        display:flex;
@@ -37,6 +42,47 @@
        text-align: center;
        margin : 10px auto;
     }
+    /* 검색 css */
+    option {
+    font-weight: normal;
+    display: block;
+    padding-block-start: 0px;
+    padding-block-end: 1px;
+    min-block-size: 1.2em;
+    padding-inline: 2px;
+    white-space: nowrap;
+   }
+   .form-inline{
+     display:flex;
+     gap:5px;
+     margin : 10px 0px 20px ;
+   }
+    .form-inline .form-control {
+     display: inline-block;
+     width: auto;
+     vertical-align: middle;
+     }
+   .form-control {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+   }
+   input[type="text"] {
+    height:30px;
+    padding-block: 2px;
+    padding-inline: 4px;
+   } 
+   button{
+     cursor: pointer;
+     height: 34px;
+   }
 </style>
 </head>
 <body>
@@ -80,7 +126,7 @@
 				   <!--답글 boardAvailable == 0이면 삭제된 게시물입니다 출력 코드  -->
 				   <c:if test="${rdto.re_level>1}">
 	                  <c:if test="${rdto.boardAvailable==1}">
-	                    <a href="/replyboard/detail?num=${rdto.num}&page=${paging.page}"><c:out value='${rdto.subject}'/></a>
+	                    <a href="/replyboard/detail?num=${rdto.num}&page=${paging.page}&ref=${rdto.ref}"><c:out value='${rdto.subject}'/></a>
 	                  </c:if>
 		              <c:if test="${rdto.boardAvailable==0}">
 		               <a href="javascript:goMsg()">[RE]삭제된 게시물입니다.</a>
@@ -90,7 +136,7 @@
 	               <!--원글 boardAvailable == 0이면 삭제된 게시물입니다 출력 코드  -->
 		            <c:if test="${rdto.re_level==1}">
 		              <c:if test="${rdto.boardAvailable==1}">
-		                <a href="/replyboard/detail?num=${rdto.num}&page=${paging.page}"><c:out value='${rdto.subject}'/></a>
+		                <a href="/replyboard/detail?num=${rdto.num}&page=${paging.page}&ref=${rdto.ref}"><c:out value='${rdto.subject}'/></a>
 		              </c:if>
 		              <c:if test="${rdto.boardAvailable==0}">
 		                <a href="javascript:goMsg()">삭제된 게시물입니다.</a>
@@ -108,6 +154,27 @@
 			<c:set var="number" value="${number - 1 }" />
 		</c:forEach>
     </table>
+    <!-- 검색 메뉴 작성 -->
+	<!-- <form class="form-inline" method="post"> -->
+	<div class="form-inline">
+	  <div class="form-group">
+	    <select name="searchType" class="form-control">
+	       <%-- <option value="writer" ${paging.searchType =='writer' ? 'selected' : ''}>이름</option>
+	       <option value="writer" ${paging.searchType =='subject' ? 'selected' : ''}>제목</option>
+	       <option value="writer" ${paging.searchType =='content' ? 'selected' : ''}>내용</option> --%>
+	       <option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>이름</option>
+	       <option value="subject" <c:if test="${searchType eq 'subject'}">selected</c:if>>제목</option>
+	       <option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
+	    </select>
+	  </div>
+	  <div class="form-group">
+	    <input type="text" class="form-control" name="keyword" value="${paging.keyword}">
+	  </div>
+	  <button type="submit" class="btn btn-default" id="searchBtn">검색</button>
+    </div>	  
+	<!-- </form> -->
+	  <h1>${paging.searchType =='writer' ? 'selected' : ''}</h1>
+	  
 	  <div class="paging">
 	    <!-- 게시판의 글이 존재하지 않으면 페이징처리를 하지 않는다. -->
 		<c:if test="${paging.number ne 0}"> 
@@ -118,7 +185,7 @@
 	        </c:when>
 	        <%-- 1페이지가 아닌 경우에는 [이전]을 클릭하면 현재 페이지보다 1 작은 페이지 요청 --%>
 	        <c:otherwise>
-	            <a href="/replyboard?page=${paging.page-1}">[이전]</a>
+	            <a href="/replyboard?page=${paging.page-1}&keyword=${paging.keyword}">[이전]</a>
 	        </c:otherwise>
 	    </c:choose>
 	
@@ -131,7 +198,7 @@
 	            </c:when>
 	
 	            <c:otherwise>
-	                <a href="/replyboard?page=${i}">${i}</a>
+	                <a href="/replyboard?page=${i}&keyword=${paging.keyword}">${i}</a>
 	            </c:otherwise>
 	        </c:choose>
 	    </c:forEach>
@@ -141,7 +208,7 @@
 	            <span>[다음]</span>
 	        </c:when>
 	        <c:otherwise>
-	                <a href="/replyboard?page=${paging.page+1}">[다음]</a>
+	                <a href="/replyboard?page=${paging.page+1}&keyword=${paging.keyword}">[다음]</a>
 	        </c:otherwise>
 	    </c:choose>
 	  </c:if>    
@@ -174,5 +241,15 @@
 	function goMsg(){
 		 alert("삭제된 게시물입니다."); 
 	}
+	
+	   document.getElementById("searchBtn").onclick = function () {
+		let searchType = document.getElementsByName("searchType")[0].value;
+		let keyword = document.getElementsByName("keyword")[0].value;
+		let url = "/replyboard?searchType=" + searchType + "&keyword=" + keyword;
+		location.href = encodeURI(url);
+	};
+	
 </script>
+
+
 </html>

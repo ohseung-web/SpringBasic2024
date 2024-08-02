@@ -4,6 +4,7 @@
  <configuration>
     <typeAliases>
         <typeAlias type="com.green.replyboard.dto.ReplyBoardDTO" alias="rDTO"/>
+        <typeAlias type="com.green.replyboard.dto.PageDTO" alias="pDTO"/>
     </typeAliases>
  </configuration>       
         
